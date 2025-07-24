@@ -13,6 +13,7 @@ Este proyecto es una aplicación desarrollada en Java para la gestión de un alb
 ## 🛠️ Tecnologías Usadas
 
 - Java 17
+- NetBeans 25
 - MySQL (o SQLite)
 - JavaFX / Swing
 - Maven / Gradle
