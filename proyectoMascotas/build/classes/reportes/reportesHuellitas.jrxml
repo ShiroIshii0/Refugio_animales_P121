@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportesHuellitas" language="groovy" pageWidth="842" pageHeight="595" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="211c8e6e-02d6-429f-a6c0-5466702b42d5">
+	<property name="ireport.zoom" value="0.8467108950806659"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idmascotas" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+    h.diagnostico,
+    h.fechaConsulta,
+    h.medicamentos,
+    m.nombre AS nombre_mascota,
+    m.raza,
+    m.color,
+    m.edad,
+    e.nombre AS especie,
+    CONCAT(p.nombre, ' ', p.paterno, ' ', p.materno) AS nombre_veterinario,
+    p.ci AS ci_veterinario,
+    CONCAT(pp.nombre, ' ', pp.paterno, ' ', pp.materno) AS nombre_adoptante,
+    pp.ci AS ci_adoptante,
+    aa.telefono,
+    aa.correo
+FROM historial h
+INNER JOIN mascotas m ON h.idmas = m.idm
+INNER JOIN especies e ON m.idesp = e.ide
+INNER JOIN veterinarios v ON h.idvete = v.idper
+INNER JOIN personas p ON p.idp = v.idper
+INNER JOIN adopciones a ON a.idmas = m.idm
+INNER JOIN adoptantes aa ON aa.idper = a.idadop
+INNER JOIN personas pp ON pp.idp = aa.idper
+WHERE h.idmas = $P{idmascotas}]]>
+	</queryString>
+	<field name="diagnostico" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaConsulta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="medicamentos" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_mascota" class="java.lang.String"/>
+	<field name="raza" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="color" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="edad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="especie" class="java.lang.String"/>
+	<field name="nombre_veterinario" class="java.lang.String"/>
+	<field name="ci_veterinario" class="java.lang.Integer"/>
+	<field name="nombre_adoptante" class="java.lang.String"/>
+	<field name="ci_adoptante" class="java.lang.Integer"/>
+	<field name="telefono" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="correo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="nombre_mascota_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{nombre_mascota}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="244" y="0" width="375" height="20" uuid="066d5087-432e-4ef9-b323-caa6bf95ae1c"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Historial Medico Refugio de Animales Huellitas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="246" splitType="Stretch">
+			<textField>
+				<reportElement x="47" y="72" width="100" height="20" uuid="bf890f5a-97c7-433b-9d19-09d037ec3256"/>
+				<textFieldExpression><![CDATA[$F{nombre_mascota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="194" y="72" width="100" height="20" uuid="05d57b98-29e0-448c-a4b1-b8a04e32ee2b"/>
+				<textFieldExpression><![CDATA[$F{raza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="72" width="100" height="20" uuid="4ae7ac65-7282-441f-bc85-8945f146058e"/>
+				<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="514" y="72" width="100" height="20" uuid="570b68ee-d0eb-4f17-af02-1b8ed2eb8ba1"/>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="641" y="72" width="108" height="20" uuid="1ec4a8d8-23e2-434a-9ae8-5c78d4b8a387"/>
+				<textFieldExpression><![CDATA[$F{especie}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="194" y="40" width="100" height="20" uuid="1fa4fd60-b246-4d1d-b5fe-6e0a3102a365"/>
+				<text><![CDATA[Raza]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="40" width="100" height="20" uuid="56da864f-d3f4-46b1-b427-266e9b2f5c02"/>
+				<text><![CDATA[Nombre Mascota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="40" width="100" height="20" uuid="d822cd2d-ef38-4075-b8a5-56c78f46235c"/>
+				<text><![CDATA[Color]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="514" y="40" width="100" height="20" uuid="213ffdcf-de9c-4d89-be51-2f8a48442deb"/>
+				<text><![CDATA[Edad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="641" y="40" width="108" height="20" uuid="b8ae4230-ddd3-4d25-a06a-1dfcfd0dd16f"/>
+				<text><![CDATA[Especie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="15" width="133" height="20" uuid="ddaa7d9d-1c2d-42cd-abab-b64dd49eae59"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Datos Mascota:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="102" width="133" height="20" uuid="e078aedf-e961-4c80-aad3-2bdb34ba0995"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Datos Persona:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="47" y="179" width="220" height="20" uuid="cd825541-1c5c-4a5c-a2be-694bb4afebea"/>
+				<textFieldExpression><![CDATA[$F{nombre_adoptante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="179" width="130" height="20" uuid="f3013c5b-364b-4b6d-8b8e-b8cd1dccc42e"/>
+				<textFieldExpression><![CDATA[$F{ci_adoptante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="437" y="179" width="149" height="20" uuid="f5fff7d5-fbbd-4283-98fd-991036f05852"/>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="597" y="179" width="189" height="20" uuid="c0f0c1e0-abf2-49da-b213-e45af8fbda1e"/>
+				<textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="47" y="149" width="220" height="20" uuid="ca23696e-1445-42c7-aa7a-d58a6d6f8d95"/>
+				<text><![CDATA[Nombre completo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="149" width="130" height="20" uuid="d7131def-202e-4327-ae95-e5382cf2aaa6"/>
+				<text><![CDATA[C.I.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="149" width="149" height="20" uuid="944b1bde-6f4b-44df-b756-ac70cf584722"/>
+				<text><![CDATA[Telefono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="597" y="149" width="189" height="20" uuid="12f87335-e54c-42c9-98e2-d0110f2ccf67"/>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="211" y="213" width="375" height="20" uuid="f5393735-402a-45a6-bad0-6a21e6063b19"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Lista de Atenciones Medicas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="8" width="100" height="20" uuid="722fd330-6762-4a69-b931-674c81acdade"/>
+				<text><![CDATA[fechaConsulta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="8" width="155" height="20" uuid="7b3745ef-938d-457f-865f-706f0d29d98c"/>
+				<text><![CDATA[diagnostico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="8" width="174" height="20" uuid="496e3bfc-4897-4446-bda3-7495bf3c08a6"/>
+				<text><![CDATA[medicamentos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="8" width="205" height="20" uuid="1422b57e-5f51-4c98-aeda-09ad306fc0e7"/>
+				<text><![CDATA[nombre_veterinario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="686" y="8" width="116" height="20" uuid="c0e94646-f67c-4600-b93e-2eea529677ea"/>
+				<text><![CDATA[ci_veterinario]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="15" width="100" height="20" uuid="dd0a87c9-b689-48e7-91dd-71042470cee6"/>
+				<textFieldExpression><![CDATA[$F{fechaConsulta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="112" y="15" width="155" height="20" uuid="bf190a54-bed8-4efe-a2a5-557a6149a8fd"/>
+				<textFieldExpression><![CDATA[$F{diagnostico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="15" width="174" height="20" uuid="2c026ee2-b166-4147-b11b-63607a166b94"/>
+				<textFieldExpression><![CDATA[$F{medicamentos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="15" width="205" height="20" uuid="9164b381-56d1-4051-a5ac-2c361e0154a7"/>
+				<textFieldExpression><![CDATA[$F{nombre_veterinario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="686" y="15" width="116" height="20" uuid="11d4c9a4-4eba-4365-987c-19cc9b0652e1"/>
+				<textFieldExpression><![CDATA[$F{ci_veterinario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="49" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
