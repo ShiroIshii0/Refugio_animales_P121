@@ -8,14 +8,14 @@ Este proyecto es una aplicación desarrollada en Java para la gestión de un alb
 - Gestión de adoptantes y voluntarios
 - Historias de adopción
 - Búsqueda y filtrado de mascotas
-- Interfaz gráfica amigable (si aplica)
+- Interfaz gráfica amigable
 
 ## 🛠️ Tecnologías Usadas
 
 - Java 17
 - NetBeans 25
 - MySQL (o SQLite)
-- JavaFX / Swing
+- Swing
 - Maven / Gradle
 
 ## 📦 Instalación
